@@ -1,0 +1,63 @@
+class Solution{Q
+    public:
+      int countTriplets(vector<int> &arr, int target) {
+          int n=arr.size();
+          int count=0;
+          for(int i=0;i<n-2;i++){
+              int start=i+1;
+              int end=n-1;
+              while(start<end){
+                  int sum=arr[i]+arr[start]+arr[end];
+                  if(sum==target){
+                      if(arr[start]==arr[end]){
+                          int len=end-start+1;
+                          count+=len*(len-1)/2;
+                          break;
+                      }
+                     int leftCount=1, rightCount=1;
+                     while(start+1<end && arr[start]==arr[start+1]){
+                         start++;
+                         leftCount++;
+                     }
+                     while(end-1>start && arr[end]==arr[end-1]){
+                         end--;
+                         rightCount++;
+                     }
+                     count+=leftCount*rightCount;
+                     start++;
+                     end--;
+                      
+                  }
+                  else if(sum<target){
+                      start++;
+                  }
+                  else{
+                      end--;
+                  }
+              }
+          }
+          return count;
+      }
+};
+
+
+
+
+
+// class Solution {
+//   public:
+//     int countTriplets(vector<int> &arr, int target) {
+//         int n=arr.size();
+//         int count=0;
+//       for(int i=0;i<n-2;i++){
+//           for(int j=i+1;j<n-1;j++){
+//               for(int k=j+1;k<n;k++){
+//                   if(arr[i]+arr[j]+arr[k]==target){
+//                       count++;
+//                   }
+//               }
+//           }
+//       }
+//       return count;
+//     }
+// };
