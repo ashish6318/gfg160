@@ -15,3 +15,23 @@ class Solution {
        return {-1};
     }
 };
+
+// better approach
+class Solution {
+  public:
+    vector<int> subarraySum(vector<int> &arr, int target) {
+       int n=arr.size();
+       int start=0,sum=0;
+       for(int i=0;i<n;i++){
+           sum+=arr[i];
+           while(sum>target){
+               sum-=arr[start];
+               start++;
+           }
+           if(sum==target){
+               return {start+1,i+1};
+           }
+       }
+       return {-1};
+    }
+};
